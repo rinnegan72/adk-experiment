@@ -152,21 +152,21 @@ func main() {
 	}
 	_, err := client.Get("http://10.147.17.169:11434")
 	if err != nil {
-		log.Fatal("Ollama is not running. Please start Ollama first with: ollama run qwen2.5-coder:7b")
+		log.Fatal("Ollama is not running. Please start Ollama first with: ollama run infra-rca:latest")
 	}
 
 	// Create a model that points to Ollama
 	ollamaModel := &OllamaModel{
 		baseURL: "http://10.147.17.169:11434",
-		model:   "qwen2.5-coder:7b",
+		model:   "infra-rca:latest",
 		client:  &http.Client{Timeout: 60 * time.Second},
 	}
 
 	timeAgent, err := llmagent.New(llmagent.Config{
 		Name:        "hello_time_agent",
 		Model:       ollamaModel,
-		Description: "An agent that can interact with the qwen2.5-coder:7b model via Ollama.",
-		Instruction: "You are a helpful assistant based on qwen2.5-coder:7b running via Ollama.",
+		Description: "An agent that can interact with the infra-rca:latest model via Ollama.",
+		Instruction: "You are a helpful assistant based on infra-rca:latest running via Ollama.",
 		Tools:       []tool.Tool{}, // Removed GoogleSearch tool since we're not using Gemini
 	})
 	if err != nil {
